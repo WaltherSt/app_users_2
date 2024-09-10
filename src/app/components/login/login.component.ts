@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import Swal from 'sweetalert2';
 import { User } from '../../models/user';
-import { SharingDataService } from '../../services/sharing-data.service';
+import { login } from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'login',
@@ -12,11 +13,9 @@ import { SharingDataService } from '../../services/sharing-data.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  user: User;
+  user: User = new User();
 
-  constructor(private sharingData: SharingDataService) {
-    this.user = new User();
-  }
+  constructor(private store: Store<{ auth: any }>) {}
 
   onSubmit() {
     if (!this.user.username || !this.user.password) {
@@ -26,10 +25,9 @@ export class LoginComponent {
         'error'
       );
     } else {
-      this.sharingData.handlerLoginEventEmitter.emit({
-        username: this.user.username,
-        password: this.user.password,
-      });
+      this.store.dispatch(
+        login({ username: this.user.username, password: this.user.password })
+      );
     }
   }
 }
