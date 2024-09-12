@@ -22,11 +22,13 @@ export const usersReducer = createReducer(
     paginator: {},
     user,
     erros: {},
+    loading: true,
   },
 
   on(findAll, (state, { users }) => ({
     ...state,
     users: [...users],
+    loading: false,
   })),
 
   on(resetUser, (state) => ({
@@ -39,6 +41,7 @@ export const usersReducer = createReducer(
     ...state,
     users: [...users],
     paginator: { ...paginator },
+    loading: false,
   })),
   on(find, (state, { id }) => ({
     ...state,

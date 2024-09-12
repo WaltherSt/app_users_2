@@ -5,7 +5,13 @@
   Crear Usuario
 </button>
 
-} @if (users.length == 0) {
+} @if (loading) {
+
+<div class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+} @else { @if (users.length == 0) {
 <div class="alert alert-warning">No hay registros en el sistema!</div>
 } @else {
 <table class="table table-hover table-striped">
@@ -53,3 +59,5 @@
 </table>
 }
 <paginator [paginator]="paginator" [url]="'/users/page'" />
+
+}
