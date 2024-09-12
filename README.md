@@ -1,8 +1,8 @@
 # 5UserApp
 
 usuario administrador:
-username: waltertnt
-password: 12345
+USERNAME: waltertnt
+PASSWORD: 12345
 
 
 
